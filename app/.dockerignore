@@ -1,3 +1,6 @@
+**/.DS_Store
+**/.git
+.dockerignore
 Dockerfile
 docker-compose.yml
 Pipfile
