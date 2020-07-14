@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<style>
+table td {
+  width:100px;
+  height:100px;
+  text-align:center;
+  vertical-align:middle;
+  background-color:#ccc;
+  border:1px solid #fff;
+}
+
+table td.highlighted {
+  background-color:#999;
+}
+</style>
+{% endblock%}
+
+{% block content %}
+<!-- From: http://jsfiddle.net/Brv6J/3/ -->
+<div class="container-fluid">
+  <table class="table" id="calendar">
+    <tr>
+      <td>a</td>
+      <td>b</td>
+      <td>c</td>
+    </tr>
+    <tr>
+      <td>d</td>
+      <td>e</td>
+      <td>f</td>
+    </tr>
+    <tr>
+      <td>g</td>
+      <td>h</td>
+      <td>i</td>
+    </tr>
+  </table>
+</div>
+{% endblock %}
+
+{% block script %}
+<script>
+  $(function () {
+  var isMouseDown = false,
+    isHighlighted;
+  $("#calendar td")
+    .mousedown(function () {
+      isMouseDown = true;
+      $(this).toggleClass("highlighted");
+      isHighlighted = $(this).hasClass("highlighted");
+      return false; // prevent text selection
+    })
+    .mouseover(function () {
+      if (isMouseDown) {
+        $(this).toggleClass("highlighted", isHighlighted);
+      }
+    })
+    .bind("selectstart", function () {
+      return false;
+    })
+
+  $(document)
+    .mouseup(function () {
+      isMouseDown = false;
+    });
+});
+</script>
+{% endblock %}
